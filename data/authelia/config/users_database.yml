@@ -1,0 +1,7 @@
+users:
+  myuser:
+    password: "$argon2id$v=19$m=65536,t=3,p=4$VOo9Z+xdi1GqlVJKKeVcCw$AFYiNrRzbWu6gV9SVJ/QgrX8pF0kROd4T7nFbKdfrJA"
+    displayname: "Admin"
+    email: "tejasnair2002@gmail.com"
+    groups:
+      - admins

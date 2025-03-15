@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-LoliSimpErpApplication<loliSimpErp>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.degenCoders.loliSimpErp.LoliSimpErpApplication",
+            "projectName": "loliSimpErp",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

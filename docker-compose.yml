@@ -1,0 +1,81 @@
+services:
+  traefik:
+    container_name: 'traefik'
+    image: 'traefik:v3.1'
+    command:
+      - '--api=true'
+      - '--api.dashboard=true'
+      - '--api.insecure=false'
+      - '--global.sendAnonymousUsage=false'
+      - '--global.checkNewVersion=false'
+      - '--log=true'
+      - '--log.level=DEBUG'
+      - '--log.filepath=/config/traefik.log'
+      - '--providers.docker=true'
+      - '--providers.docker.exposedByDefault=false'
+      - '--entryPoints.http=true'
+      - '--entryPoints.http.address=:8080/tcp'
+      - '--entryPoints.http.http.redirections.entryPoint.to=https'
+      - '--entryPoints.http.http.redirections.entryPoint.scheme=https'
+      ## Please see the Forwarded Header Trust section of the Authelia Traefik Integration documentation.
+      - '--entryPoints.http.forwardedHeaders.trustedIPs=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,fc00::/7'
+      - '--entryPoints.http.proxyProtocol.trustedIPs=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,fc00::/7'
+      - '--entryPoints.http.forwardedHeaders.insecure=false'
+      - '--entryPoints.http.proxyProtocol.insecure=false'
+      - '--entryPoints.https=true'
+      - '--entryPoints.https.address=:8443/tcp'
+      ## Please see the Forwarded Header Trust section of the Authelia Traefik Integration documentation.
+      - '--entryPoints.https.forwardedHeaders.trustedIPs=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,fc00::/7'
+      - '--entryPoints.https.proxyProtocol.trustedIPs=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,fc00::/7'
+      - '--entryPoints.https.forwardedHeaders.insecure=false'
+      - '--entryPoints.https.proxyProtocol.insecure=false'
+    networks:
+      net: {}
+    ports:
+      - '80:8080'
+      - '443:8443'
+    volumes:
+      - '//var/run/docker.sock:/var/run/docker.sock'
+      - './data/traefik:/config'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`traefik.example.com`)"
+      - "traefik.http.routers.api.entryPoints=https"
+      - "traefik.http.routers.api.tls=true"
+      - "traefik.http.routers.api.service=api@internal"
+      - "traefik.http.routers.api.middlewares=authelia@docker"
+      
+  authelia:
+    container_name: 'authelia'
+    image: 'authelia/authelia'
+    restart: 'unless-stopped'
+    networks:
+      net: {}
+    volumes:
+      - './data/authelia/config:/config'
+    environment:
+      TZ: "Asia/Calcutta"
+    labels:
+      traefik.enable: 'true'
+      traefik.http.routers.authelia.rule: 'Host(`auth.example.com`)'
+      traefik.http.routers.authelia.entryPoints: 'https'
+      traefik.http.routers.authelia.tls: 'true'
+      traefik.http.middlewares.authelia.forwardAuth.address: 'http://authelia:9091/api/authz/forward-auth'
+      ## The following commented line is for configuring the Authelia URL in the proxy. We strongly suggest this is
+      ## configured in the Session Cookies section of the Authelia configuration.
+      # traefik.http.middlewares.authelia.forwardAuth.address: 'http://authelia:9091/api/authz/forward-auth?authelia_url=https%3A%2F%2Fauth.example.com%2F'
+      traefik.http.middlewares.authelia.forwardAuth.trustForwardHeader: 'true'
+      traefik.http.middlewares.authelia.forwardAuth.authResponseHeaders: 'Remote-User,Remote-Groups,Remote-Email,Remote-Name'
+  whoami:
+    image: traefik/whoami
+    container_name: whoami
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
+      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - "traefik.http.routers.whoami.middlewares=authelia@docker"
+
+networks:
+  net:
+    external: true
+    driver: bridge
