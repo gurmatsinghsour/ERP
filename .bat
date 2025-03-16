@@ -37,7 +37,7 @@ REM      with 'db.url=jdbc:postgresql://<IP>:5432/mydb'
 REM ----------------------------------------
 powershell -Command ^
   "(Get-Content /home/arcys/ERP/core/backend/src/main/resources/config.properties) ^
-    -replace '^db.url=.*','db.url=jdbc:postgresql://%IP%:5432/mydb' ^
+    -replace '^db.url=.*','db.url=jdbc:postgresql://%IP%:5432/admindb' ^
     | Out-File config.properties"
 
 echo config.properties updated to use IP: %IP%

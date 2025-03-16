@@ -23,4 +23,4 @@ echo "Detected Windows IP: $WIN_IP"
 #    Adjust path to config.properties if it's elsewhere.
 sed -i "s|^db.url=.*|db.url=jdbc:postgresql://${WIN_IP}:5432/mydb|" /home/arcys/ERP/core/backend/src/main/resources/config.properties
 
-echo "config.properties updated with: jdbc:postgresql://${WIN_IP}:5432/mydb"
+echo "config.properties updated with: jdbc:postgresql://${WIN_IP}:5432/admindb"
