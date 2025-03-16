@@ -1,0 +1,53 @@
+entryPoints:
+  http:
+    address: ":8080"
+    http:
+      redirections:
+        entryPoint:
+          to: https
+          scheme: https
+  https:
+    address: ":443"
+
+providers:
+  docker: {}
+  file:
+    directory: /etc/traefik
+    watch: true
+
+api:
+  dashboard: true  # Optional, but very useful for debugging
+
+http:
+  services:
+    my-springboot-app:
+      loadBalancer:
+        servers:
+          - url: "http://172.30.132.231:8081"  # Your WSL IP and Spring Boot port
+
+  routers:
+    my-springboot-app-router:
+      rule: "Host(`yourapp.example.com`)"
+      entryPoints:
+        - https  # Use HTTPS entry point
+      service: my-springboot-app
+      middlewares:
+        - authelia
+      tls: true
+
+  middlewares:
+
+    authelia:
+      forwardAuth:
+        address: http://authelia:9091/api/authz/forward-auth  # Ensure correct URL for Authelia API
+        trustForwardHeader: true
+        authResponseHeaders:
+          - Remote-User
+          - Remote-Groups
+          - Remote-Name
+          - Remote-Email
+
+accessLog:
+  filePath: "/config/access.log"  # Path where logs will be stored (relative to container volume)
+  format: json                   # Optional: json, common, or combined
+  bufferingSize: 100  

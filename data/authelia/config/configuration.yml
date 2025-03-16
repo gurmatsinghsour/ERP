@@ -635,6 +635,8 @@ access_control:
     - domain: "whoami.localhost"
       policy: 'one_factor'
 
+    - domain: "yourapp.example.com"
+      policy: 'one_factor'
     ## Domain Regex examples. Generally we recommend just using a standard domain.
     # - domain_regex: '^(?P<User>\w+)\.example\.com$'
     #   policy: 'one_factor'
@@ -747,7 +749,7 @@ session:
       ##   - The above 'domain' option MUST either:
       ##      - Match the host portion of this URI.
       ##      - Match the suffix of the host portion when prefixed with '.'.
-      # default_redirection_url: 'https://www.example.com'
+      default_redirection_url: 'https://yourapp.example.com'
 
       ## Sets the Cookie SameSite value. Possible options are none, lax, or strict.
       ## Please read https://www.authelia.com/c/session#same_site
