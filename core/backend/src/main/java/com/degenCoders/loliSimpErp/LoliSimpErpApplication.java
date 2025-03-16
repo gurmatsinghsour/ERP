@@ -8,11 +8,8 @@ import com.degenCoders.loliSimpErp.dataBaseConnection.*;
 public class LoliSimpErpApplication {
 
 	public static void main(String[] args) {
-		PostgreSQLConnection db = new PostgreSQLConnection();
-		
-		db.connect();
 		SpringApplication.run(LoliSimpErpApplication.class, args);
-
+		PostgreSQLConnection.connect();
 	}
 
 }
