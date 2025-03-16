@@ -1,4 +1,15 @@
 services:
+  db:
+    image: postgres:latest
+    container_name: student_dbv2
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: arcy
+      POSTGRES_DB: admindb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data 
   traefik:
     container_name: 'traefik'
     image: 'traefik:v3.1'
@@ -54,7 +65,7 @@ services:
     volumes:
       - './data/authelia/config:/config'
     environment:
-      TZ: "Asia/Calcutta"
+      TZ: "America/Toronto"
     labels:
       traefik.enable: 'true'
       traefik.http.routers.authelia.rule: 'Host(`auth.example.com`)'
