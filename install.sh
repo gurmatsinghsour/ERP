@@ -1,11 +1,16 @@
 docker network create net
 
+
+USER_NAME="admin"
+DBNAME="admindb"
+
+
 CONTAINER_NAME="student_dbv2"
 docker run -d \
   --name "$CONTAINER_NAME" \
-  -e POSTGRES_USER=admin \
+  -e POSTGRES_USER="$USER" \
   -e POSTGRES_PASSWORD=arcy \
-  -e POSTGRES_DB=admindb \
+  -e POSTGRES_DB="$DBNAME" \
   -p 5432:5432 \
   -d postgres
 
@@ -24,3 +29,5 @@ echo "Detected Windows IP: $WIN_IP"
 sed -i "s|^db.url=.*|db.url=jdbc:postgresql://${WIN_IP}:5432/mydb|" /home/arcys/ERP/core/backend/src/main/resources/config.properties
 
 echo "config.properties updated with: jdbc:postgresql://${WIN_IP}:5432/admindb"
+
+
