@@ -11,11 +11,11 @@ public class Attendance {
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
-    private Student studentId;
+    private Student student;
 
     @ManyToOne
     @JoinColumn(name = "course_id", nullable= false)
-    private Course courseId;
+    private Course course;
 
     @Column(name = "class_date", nullable=false)
     private Date classDate;
@@ -32,20 +32,20 @@ public class Attendance {
         this.attendanceId = attendanceId;
     }
 
-    public Student getStudentId() {
-        return studentId;
+    public Student getstudent() {
+        return student;
     }
 
-    public void setStudentId(Student studentId) {
-        this.studentId = studentId;
+    public void setstudent(Student student) {
+        this.student = student;
     }
 
-    public Course getCourseId() {
-        return courseId;
+    public Course getcourse() {
+        return course;
     }
 
-    public void setCourseId(Course courseId) {
-        this.courseId = courseId;
+    public void setcourse(Course course) {
+        this.course = course;
     }
 
     public Date getClassDate() {
