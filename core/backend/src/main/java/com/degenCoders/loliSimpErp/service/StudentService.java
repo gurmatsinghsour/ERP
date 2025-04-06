@@ -1,7 +1,8 @@
-package com.yourcompany.yourproject.service;
+package com.degenCoders.loliSimpErp.service;
 
-import com.yourcompany.yourproject.model.Student;
-import com.yourcompany.yourproject.repository.StudentRepository;
+import com.degenCoders.loliSimpErp.Entity.Student;
+import com.degenCoders.loliSimpErp.repository.StudentRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Optional<Student> getStudentById(Integer id) {
+    public Optional<Student> getStudentById(Long id) {
         return studentRepository.findById(id);
     }
 
@@ -30,12 +31,12 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public Student updateStudent(Integer id, Student updatedStudent) {
+    public Student updateStudent(Long id, Student updatedStudent) {
         updatedStudent.setStudentId(id);
         return studentRepository.save(updatedStudent);
     }
 
-    public void deleteStudent(Integer id) {
+    public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
     }
 }

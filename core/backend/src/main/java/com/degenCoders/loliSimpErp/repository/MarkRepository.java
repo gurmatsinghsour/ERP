@@ -1,11 +1,14 @@
-package com.yourcompany.yourproject.repository;
+package com.degenCoders.loliSimpErp.repository;
 
-import com.yourcompany.yourproject.model.Mark;
+import com.degenCoders.loliSimpErp.Entity.Course;
+import com.degenCoders.loliSimpErp.Entity.Marks;
+import com.degenCoders.loliSimpErp.Entity.Student;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface MarkRepository extends JpaRepository<Mark, Integer> {
-    List<Mark> findByStudentId(Integer studentId);
-    List<Mark> findByCourseId(Integer courseId);
+public interface MarkRepository extends JpaRepository<Marks, Integer> {
+    List<Marks> findByStudentId(Student studentId);
+    List<Marks> findByCourseId(Course courseId);
 }

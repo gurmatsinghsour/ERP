@@ -1,6 +1,6 @@
-package com.yourcompany.yourproject.repository;
+package com.degenCoders.loliSimpErp.repository;
 
-import com.yourcompany.yourproject.model.ModelHistory;
+import com.degenCoders.loliSimpErp.Entity.ModelHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ModelHistoryRepository extends JpaRepository<ModelHistory, Integer> {

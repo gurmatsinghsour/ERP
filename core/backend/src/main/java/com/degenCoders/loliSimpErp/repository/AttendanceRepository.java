@@ -1,10 +1,14 @@
-package com.yourcompany.yourproject.repository;
+package com.degenCoders.loliSimpErp.repository;
 
-import com.yourcompany.yourproject.model.Attendance;
+
+import com.degenCoders.loliSimpErp.Entity.Attendance;
+import com.degenCoders.loliSimpErp.Entity.Student;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 public interface AttendanceRepository extends JpaRepository<Attendance, Integer> {
-    List<Attendance> findByStudentId(Integer studentId);
+    List<Attendance> findByStudent(Student student); 
+
 }

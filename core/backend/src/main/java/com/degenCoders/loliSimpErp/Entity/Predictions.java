@@ -1,8 +1,8 @@
 package com.degenCoders.loliSimpErp.Entity;
 
-import javax.persistence.*;
-import java.sql.Timestamp;
-
+import java.math.BigDecimal;
+import java.time.LocalDateTime; 
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "predictions")
@@ -15,7 +15,7 @@ public class Predictions {
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
-    private Student studentId;
+    private Student student;    
 
     @Column(name = "term", nullable = false)
     private Short term;
@@ -23,15 +23,15 @@ public class Predictions {
     @Column(name = "predicted_outcome", nullable = false, length = 10)
     private String predictedOutcome;
 
-    @Column(name = "probability", nullable = false, precision = 4, scale = 3)
-    private Double probability;
+    @Column(name = "probability", nullable = false, precision = 4, scale = 3, columnDefinition = "NUMERIC(4,3)")
+    private BigDecimal probability;
 
     @ManyToOne
     @JoinColumn(name = "model_version_id", nullable = false)
     private ModelHistory modelVersionId;
 
     @Column(name = "predicted_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT NOW()")
-    private Timestamp predictedAt;
+    private LocalDateTime predictedAt;
 
     public Long getPredictionId() {
         return predictionId;
@@ -42,11 +42,11 @@ public class Predictions {
     }
 
     public Student getStudentId() {
-        return studentId;
+        return this.student;
     }
 
     public void setStudentId(Student studentId) {
-        this.studentId = studentId;
+        this.student = studentId;
     }
 
     public Short getTerm() {
@@ -65,11 +65,11 @@ public class Predictions {
         this.predictedOutcome = predictedOutcome;
     }
 
-    public Double getProbability() {
+    public BigDecimal getProbability() {
         return probability;
     }
 
-    public void setProbability(Double probability) {
+    public void setProbability(BigDecimal probability) {
         this.probability = probability;
     }
 
@@ -81,11 +81,11 @@ public class Predictions {
         this.modelVersionId = modelVersionId;
     }
 
-    public Timestamp getPredictedAt() {
+    public LocalDateTime getPredictedAt() {
         return predictedAt;
     }
 
-    public void setPredictedAt(Timestamp predictedAt) {
+    public void setPredictedAt(LocalDateTime predictedAt) {
         this.predictedAt = predictedAt;
     }
 }

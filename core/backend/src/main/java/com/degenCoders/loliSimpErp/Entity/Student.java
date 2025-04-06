@@ -1,4 +1,16 @@
 package com.degenCoders.loliSimpErp.Entity;
+
+import java.math.BigDecimal;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "students")
 public class Student {
@@ -37,8 +49,8 @@ public class Student {
         return studentId;
     }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setStudentId(Long id) {
+        this.studentId = id;
     }
 
     public String getStudentNumber() {

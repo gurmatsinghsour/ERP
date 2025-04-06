@@ -1,4 +1,17 @@
 package com.degenCoders.loliSimpErp.Entity;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "marks")
 
@@ -43,12 +56,12 @@ public class Marks {
         this.studentId = student;
     }
 
-    public Course getCourse() {
-        return course;
+    public Course getCourseId() {
+        return this.courseId;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourseId(Course courseId) {
+        this.courseId = courseId;
     }
 
     public String getAssessment() {

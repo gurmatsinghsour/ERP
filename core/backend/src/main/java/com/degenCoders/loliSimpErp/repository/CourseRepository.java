@@ -1,6 +1,6 @@
-package com.yourcompany.yourproject.repository;
+package com.degenCoders.loliSimpErp.repository;
 
-import com.yourcompany.yourproject.model.Course;
+import com.degenCoders.loliSimpErp.Entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CourseRepository extends JpaRepository<Course, Integer> {

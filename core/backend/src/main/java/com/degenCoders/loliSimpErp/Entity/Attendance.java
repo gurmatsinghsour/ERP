@@ -1,12 +1,23 @@
 package com.degenCoders.loliSimpErp.Entity;
+
+import java.sql.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "attendance")
 public class Attendance {
-    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "attendance_id", nullable=false)
+    @Column(name = "attendance_id", nullable = false)
     private Long attendanceId;
 
     @ManyToOne
@@ -14,13 +25,13 @@ public class Attendance {
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", nullable= false)
+    @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    @Column(name = "class_date", nullable=false)
+    @Column(name = "class_date", nullable = false)
     private Date classDate;
 
-    @Column(name = "status", nullable=false)
+    @Column(name = "status", nullable = false)
     private String status;
 
 
@@ -32,19 +43,19 @@ public class Attendance {
         this.attendanceId = attendanceId;
     }
 
-    public Student getstudent() {
+    public Student getStudent() {
         return student;
     }
 
-    public void setstudent(Student student) {
+    public void setStudent(Student student) {
         this.student = student;
     }
 
-    public Course getcourse() {
+    public Course getCourse() {
         return course;
     }
 
-    public void setcourse(Course course) {
+    public void setCourse(Course course) {
         this.course = course;
     }
 
@@ -63,5 +74,4 @@ public class Attendance {
     public void setStatus(String status) {
         this.status = status;
     }
-
 }
