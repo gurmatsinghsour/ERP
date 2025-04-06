@@ -2,3 +2,11 @@
 *.log
 .vscode/
 pgdata/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.venv/
+venv/
+.ipynb_checkpoints/
+
