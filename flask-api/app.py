@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
+from notebooks import fr 
 
 app = Flask(__name__)
 
@@ -31,6 +32,11 @@ def predict_final():
     ]])
     gpa = final_model.predict(features)[0]
     return jsonify({"predicted_gpa": round(float(gpa), 2)})
+
+# @app.route('/Register', methods=['POST'])
+# def registerFace():
+#     fr.register_face()
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

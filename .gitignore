@@ -9,5 +9,4 @@ __pycache__/
 .venv/
 venv/
 .ipynb_checkpoints/
-
 /known_faces_data
