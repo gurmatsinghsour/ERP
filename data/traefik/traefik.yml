@@ -23,7 +23,7 @@ http:
     my-springboot-app:
       loadBalancer:
         servers:
-          - url: "http://172.30.132.231:8081"  # Your WSL IP and Spring Boot port
+          - url: "http://10.0.0.100:8081"  # Your WSL IP and Spring Boot port
 
   routers:
     my-springboot-app-router:

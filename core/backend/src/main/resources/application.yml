@@ -1,10 +1,10 @@
 spring:
+  
   datasource:
     url: jdbc:postgresql://localhost:5432/admindb
     username: admin
     password: arcy
     driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -12,3 +12,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+    port: 8081
