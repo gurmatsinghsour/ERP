@@ -1,0 +1,11 @@
+attendance_id,class_date,status,course_id,student_id
+1,2025-04-30,Present,5,3
+2,2025-04-05,Absent,3,5
+3,2025-04-23,Late,4,2
+4,2025-04-28,Late,3,2
+5,2025-04-29,Absent,3,1
+6,2025-04-17,Late,1,4
+7,2025-04-12,Late,3,1
+8,2025-04-10,Present,5,4
+9,2025-04-05,Late,3,2
+10,2025-04-24,Late,1,1

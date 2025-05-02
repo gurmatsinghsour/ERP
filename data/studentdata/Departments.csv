@@ -1,6 +1,4 @@
-department_id,name,code
-1,Computer Science,CS
-2,Mathematics,MATH
-3,Physics,PHY
-4,Chemistry,CHEM
-5,Biology,BIO
+department_id,code,name
+1,CS,Computer Science
+2,MATH,Mathematics
+3,PHYS,Physics

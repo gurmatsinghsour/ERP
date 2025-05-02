@@ -10,6 +10,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "roles")
 public class Roles {
@@ -22,6 +24,7 @@ public class Roles {
     @Column(name = "role_name", unique = true, nullable = false, length = 20)
     private String roleName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "role")
     private Set<Users> users;
 

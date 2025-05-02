@@ -1,25 +1,36 @@
 package com.degenCoders.loliSimpErp.config;
 
-import java.io.IOException;
+import org.yaml.snakeyaml.Yaml;
 import java.io.InputStream;
-import java.util.Properties;
+import java.util.Map;
 
 public class Config {
-    private static Properties properties = new Properties();
+    private static final Map<String, Object> config;
 
     static {
-        try (InputStream fis = Config.class.getClassLoader().getResourceAsStream("config.properties")) {
-            if (fis != null) {
-                properties.load(fis);
-            } else {
-                System.err.println("config.properties file not found in classpath!");
+        try {
+            InputStream input = Config.class.getClassLoader().getResourceAsStream("config.yml");
+            if (input == null) {
+                throw new RuntimeException("config.yml file not found in classpath!");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            Yaml yaml = new Yaml();
+            config = yaml.load(input);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load config.yml: " + e.getMessage(), e);
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static String get(String key) {
-        return properties.getProperty(key);
+        String[] parts = key.split("\\.");
+        Object value = config;
+        for (String part : parts) {
+            if (value instanceof Map) {
+                value = ((Map<String, Object>) value).get(part);
+            } else {
+                return null;
+            }
+        }
+        return value != null ? value.toString() : null;
     }
 }
